@@ -9,11 +9,11 @@ public class VentanaRetirar extends JDialog {
     private JTextField campoMonto;
     private JButton botonRetirar;
 
-    public VentanaRetirar() {
+        public VentanaRetirar() {
         setTitle("Retirar");
         setSize(300, 150);
         setLocationRelativeTo(null);
-        setModal(true); // Hace que la ventana sea modal
+        setModal(true);
 
         JPanel panel = new JPanel(new GridLayout(3, 2, 5, 5));
 
@@ -26,6 +26,8 @@ public class VentanaRetirar extends JDialog {
         panel.add(campoMonto);
 
         botonRetirar = new JButton("Retirar");
+        botonRetirar.setBackground(new Color(204, 0, 0)); // Color rojo
+        botonRetirar.setForeground(Color.WHITE); // Texto blanco
         panel.add(new JLabel()); // Espacio vacío
         panel.add(botonRetirar);
 

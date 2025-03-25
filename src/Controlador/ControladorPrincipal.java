@@ -15,6 +15,9 @@ public class ControladorPrincipal {
         this.vistaPrincipal.agregarListenerCrearCuenta(e -> abrirVentanaCrearCuenta());
         this.vistaPrincipal.agregarListenerDepositar(e -> abrirVentanaDepositar());
         this.vistaPrincipal.agregarListenerRetirar(e -> abrirVentanaRetirar());
+        this.vistaPrincipal.agregarListenerBuscarCuentas(e -> abrirVentanaBuscarCuentas());
+        this.vistaPrincipal.agregarListenerHistorialTransacciones(e -> abrirVentanaHistorialTransacciones());
+        this.vistaPrincipal.agregarListenerDatosEstudiante(e -> mostrarDatosEstudiante());
         this.vistaPrincipal.agregarListenerSalir(e -> System.exit(0));
     }
 
@@ -32,5 +35,18 @@ public class ControladorPrincipal {
 
     private void abrirVentanaRetirar() {
         new ControladorRetirar(); // Abre la ventana de retirar
+    }
+
+    private void abrirVentanaBuscarCuentas() {
+        new ControladorBuscarCuentas(); // Abre la ventana de buscar cuentas
+    }
+
+    private void abrirVentanaHistorialTransacciones() {
+        new ControladorHistorialTransacciones(); // Abre la ventana de historial de transacciones
+    }
+
+    private void mostrarDatosEstudiante() {
+        String datos = "Nombre: Tu Nombre\nCarnet: 202300000\nCurso: IPC1\nSección: A";
+        vistaPrincipal.mostrarMensaje(datos); // Muestra los datos del estudiante en el área de mensajes
     }
 }
