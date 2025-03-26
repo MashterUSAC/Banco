@@ -79,7 +79,7 @@ public class BancoDatos {
     }
 
     public static List<Cuenta> getCuentas() {
-        return cuentas;
+        return new ArrayList<>(cuentas); // Retorna copia de la lista
     }
 
     public static List<Cuenta> buscarCuentasPorCliente(String cuiCliente) {
@@ -99,4 +99,6 @@ public class BancoDatos {
                     .findFirst()
                     .orElse(null);
     }
+    
+    
 }

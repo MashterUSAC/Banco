@@ -2,8 +2,10 @@ package controlador;
 
 import vista.VentanaDepositar;
 import modelo.BancoDatos;
+import modelo.Cuenta;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import utilidades.Bitacora;
 
 public class ControladorDepositar implements ActionListener {
@@ -12,21 +14,26 @@ public class ControladorDepositar implements ActionListener {
     public ControladorDepositar() {
         this.ventana = new VentanaDepositar();
         this.ventana.agregarListener(this);
-        this.ventana.setVisible(true);
         
         // Cargar cuentas disponibles al iniciar
-        this.ventana.cargarCuentas(BancoDatos.getCuentasDisponibles());
+        List<Cuenta> cuentas = BancoDatos.getCuentas();
+        this.ventana.cargarCuentas(cuentas);
+        
+        this.ventana.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            String idCuenta = ventana.getIdCuentaSeleccionada();
-            if(idCuenta == null || idCuenta.isEmpty()) {
-                ventana.mostrarError("Debe seleccionar una cuenta válida");
+            String seleccionCompleta = ventana.getIdCuentaSeleccionada();
+            
+            if(seleccionCompleta == null || seleccionCompleta.equals("No hay cuentas disponibles")) {
+                ventana.mostrarError("No hay cuentas disponibles para depositar");
                 return;
             }
-
+            
+            // Extraer solo el ID de la cuenta (parte antes del " - ")
+            String idCuenta = seleccionCompleta.split(" - ")[0].trim();
             double monto = ventana.getMonto();
             
             if(monto <= 0) {
@@ -38,7 +45,9 @@ public class ControladorDepositar implements ActionListener {
                 ventana.mostrarMensaje(String.format(
                     "Depósito exitoso de Q%.2f a la cuenta %s", 
                     monto, idCuenta));
-                ventana.cerrar();
+                
+                // Actualizar lista de cuentas después del depósito
+                ventana.cargarCuentas(BancoDatos.getCuentas());
                 
                 Bitacora.registrar(
                     "Depósito", 
@@ -46,12 +55,15 @@ public class ControladorDepositar implements ActionListener {
                     String.format("Cuenta: %s - Monto: Q%.2f", idCuenta, monto)
                 );
             } else {
-                ventana.mostrarError("No se encontró la cuenta especificada");
+                ventana.mostrarError("No se pudo completar el depósito");
             }
         } catch (NumberFormatException ex) {
-            ventana.mostrarError("Monto inválido: debe ser un número");
+            ventana.mostrarError("Monto inválido: " + ex.getMessage());
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            ventana.mostrarError("Formato de cuenta inválido");
         } catch (Exception ex) {
             ventana.mostrarError("Error inesperado: " + ex.getMessage());
-            }
+            ex.printStackTrace();
+        }
     }
 }
