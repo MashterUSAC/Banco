@@ -25,7 +25,7 @@ public class ControladorCrearCuenta implements ActionListener {
             String cuiCliente = ventanaCrearCuenta.getCuiUsuarioSeleccionado();
             String idCuenta = ventanaCrearCuenta.getIdCuenta();
 
-            // Validar que se haya generado un ID de cuenta
+            // Validar ID de cuenta
             if (idCuenta.isEmpty()) {
                 ventanaCrearCuenta.mostrarMensaje("Primero genera un ID para la cuenta.");
                 return;
@@ -39,7 +39,7 @@ public class ControladorCrearCuenta implements ActionListener {
     }
 
     private String generarIdCuenta() {
-        // Lógica para generar un ID de cuenta único (puedes mejorarla)
-        return "C" + System.currentTimeMillis(); // Ejemplo: C1633024800000
+        // ID de cuenta único
+        return "C" + System.currentTimeMillis(); // 
     }
 }

@@ -32,7 +32,7 @@ public class ControladorDepositar implements ActionListener {
                 return;
             }
             
-            // Extraer solo el ID de la cuenta (parte antes del " - ")
+            // Extraer ID de la cuenta
             String idCuenta = seleccionCompleta.split(" - ")[0].trim();
             double monto = ventana.getMonto();
             
@@ -46,7 +46,7 @@ public class ControladorDepositar implements ActionListener {
                     "Depósito exitoso de Q%.2f a la cuenta %s", 
                     monto, idCuenta));
                 
-                // Actualizar lista de cuentas después del depósito
+                // Actualizar lista de cuentas del depósito
                 ventana.cargarCuentas(BancoDatos.getCuentas());
                 
                 Bitacora.registrar(

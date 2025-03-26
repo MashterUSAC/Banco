@@ -12,10 +12,10 @@ public class VentanaDatosEstudiante extends JDialog {
 
         JPanel panel = new JPanel(new GridLayout(4, 1, 5, 5));
 
-        panel.add(new JLabel("Nombre: Armando Alvarez"));
-        panel.add(new JLabel("Carnet: 202312345"));
+        panel.add(new JLabel("Nombre: Saul Orozco"));
+        panel.add(new JLabel("Carnet: 202405397"));
         panel.add(new JLabel("Curso: Introducción a la Programación y Computación 1"));
-        panel.add(new JLabel("Sección: A"));
+        panel.add(new JLabel("Sección: F"));
 
         add(panel);
     }

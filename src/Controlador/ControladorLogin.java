@@ -13,7 +13,7 @@ public class ControladorLogin {
         this.vistaLogin = vistaLogin;
         this.vistaPrincipal = vistaPrincipal;
 
-        // Agregar el listener al botón de inicio de sesión
+        // Agregar listener al botón de inicio de sesión
         this.vistaLogin.agregarListenerLogin(e -> validarCredenciales());
     }
 
@@ -21,8 +21,15 @@ public class ControladorLogin {
         String usuario = vistaLogin.getUsuario();
         String contrasena = vistaLogin.getContrasena();
 
-        // Validar credenciales (usuario y contraseña son "a")
+        // Validar credenciales
         if (usuario.equals("a") && contrasena.equals("a")) {
+            vistaLogin.mostrarMensaje("Bienvenido");
+            vistaLogin.setVisible(false); // Ocultar la ventana de login
+            vistaPrincipal.setVisible(true); // Mostrar la ventana principal
+        } else {
+            vistaLogin.mostrarMensaje("Usuario o contraseña incorrectos");
+        }
+        if (usuario.equals("AdministradorIPC1F") && contrasena.equals("ipc1F1s2025 ")) {
             vistaLogin.mostrarMensaje("Bienvenido");
             vistaLogin.setVisible(false); // Ocultar la ventana de login
             vistaPrincipal.setVisible(true); // Mostrar la ventana principal
